@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Background Video</title>
+    <link rel="stylesheet" href="{% static 'css/show.css' %}">
+    <style>
+        /* CSS for the loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            font-size: 1.5rem;
+            font-family: Arial, sans-serif;
+        }
+
+        .loader .spinner {
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 8px solid white;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Full page styling for initial content */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+        <div>Loading...</div>
+    </div>
+
+    <section id="content">
+        <div class="container">
+            <h1 class="animate">MELODIFY</h1>
+            <p class="animate">Lyrics Generator</p>
+            <video autoplay muted loop id="background-video">
+                <source src="{% static 'video/bc.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag. <!-- Add fallback content -->
+            </video>
+        </div>
+    </section>    
+
+    <script>
+        // Function to handle initial display and then show the loader
+        function handlePageTransition() {
+            // Show the content initially
+            document.querySelector('#content').style.display = 'block';
+
+            // Show the loader after a delay
+            setTimeout(function() {
+                // Hide the initial content and show the loader
+                document.querySelector('#content').style.display = 'none';
+                document.querySelector('.loader').style.display = 'flex';
+
+                // Redirect to the index page after a delay
+                setTimeout(function() {
+                    window.location.href = "{% url 'index' %}"; // Change 'index' to the name of your URL pattern for the index page
+                }, 2000); // 2000 milliseconds = 2 seconds
+            }, 5000); // 5000 milliseconds = 5 seconds
+        }
+
+        // Call the function when the page loads
+        window.onload = handlePageTransition;
+    </script>
+</body>
+</html>
