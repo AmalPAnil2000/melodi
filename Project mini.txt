@@ -1,0 +1,21 @@
+Project mini
+
+Lyrics Generator 
+
+Title : Melodify
+
+
+Land page:
+
+Show Title and paragarph
+
+# Melodify
+
+# Lyrics Generator 
+
+# added a loader
+
+Done or Not : Done
+
+
+landing page:
