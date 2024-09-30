@@ -233,19 +233,19 @@ def about_view(request):
 
 # admin
 from datetime import datetime, timedelta
+from django.db.models import Sum
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
+from .models import LyricsGeneration, Music
 
 def admin_dashboard(request):
     # Get all users
-    users = User.objects.all()
-    user_count = users.count()
+    user_count = User.objects.count()
 
-    total_generations = LyricsGeneration.objects.count()
+    # Count of total lyrics generations
+    total_generations = LyricsGeneration.objects.aggregate(total=Sum('generation_count'))['total'] or 0
 
+    # Total music count
     total_music_count = Music.objects.count()
-
-    
 
     # Get total logins for the last 7 days
     days = []
@@ -261,8 +261,6 @@ def admin_dashboard(request):
         login_counts.append(day_login_count)
 
     context = {
-        'users': users,
-        'user_count': user_count,
         'user_count': user_count,
         'total_generations': total_generations,
         'total_music_count': total_music_count,
@@ -271,6 +269,8 @@ def admin_dashboard(request):
     }
 
     return render(request, 'dashboard_admin/dashboard.html', context)
+
+
 
 from django.utils.timezone import now
 from django.http import HttpResponse

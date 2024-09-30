@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=0my&j%o$0=u2!6t=mq#*z+r+k^7jj$pn%4*8hcjf^x61792^d'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =  os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split("")
 
 
 # Application definition
@@ -84,23 +85,23 @@ WSGI_APPLICATION = 'Melodify.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'melodify',   # The name of the database you created
-        'USER': 'root',           # The default MySQL user in XAMPP
-        'PASSWORD': '',           # Leave blank if there's no password for 'root'
-        'HOST': 'localhost',      # Usually 'localhost' for XAMPP
-        'PORT': '3306',           # Default MySQL port in XAMPP
-    }
-}
-
 # DATABASES = {
-#     'default' :dj_database_url.parse(
-#         "postgresql://melodify_user:RGoSwpTLikKl7E6P67te7g5T1yAAotJy@dpg-crf9phjqf0us738hm2eg-a.singapore-postgres.render.com/melodify"
-#     )
-
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'melodify',   # The name of the database you created
+#         'USER': 'root',           # The default MySQL user in XAMPP
+#         'PASSWORD': '',           # Leave blank if there's no password for 'root'
+#         'HOST': 'localhost',      # Usually 'localhost' for XAMPP
+#         'PORT': '3306',           # Default MySQL port in XAMPP
+#     }
 # }
+database_url = os.environ.get("DATABASE_URL")
+DATABASES = {
+    'default' :dj_database_url.parse(
+        database_url
+    )
+
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -39,10 +39,11 @@
                             <p class="tip">USER</p>
                             <p class="second-text" id="mychart">{{ user_count }}</p>
                         </div>
-                        <div class="card blue">
+                        <!-- <div class="card blue">
                             <p class="tip">GENERATION</p>
-                            <p class="second-text">{{ total_generations }}</p>
-                        </div>
+                            <p class="second-text">{{ total_generations }}</p> 
+                        </div> -->
+                        
                         <div class="card green">
                             <p class="tip">Music Count</p>
                             <p class="second-text">{{ total_music_count }}</p>
@@ -77,12 +78,11 @@
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['User Count', 'Total Generation', 'Total Music'],
+                labels: ['User Count', 'Total Music'],
                 datasets: [{
                     label: '# Count',
                     data: [
                         {{ user_count|default:"0" }}, 
-                        {{ total_generations|default:"0" }}, 
                         {{ total_music_count|default:"0" }}
                     ],
                     borderWidth: 1,
