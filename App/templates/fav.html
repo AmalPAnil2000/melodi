@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/fav.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar" id="navbar">
+        <nav>
+            <ul>
+                <li>MELODIFY</li>
+                <li>
+                    <a href="{% url 'index' %}" style="text-decoration: none;">
+                        <button class="btn-66">Home</button>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'music_list' %}" style="text-decoration: none;">
+                        <button class="btn-66">Music</button>
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="{% url 'about_view' %}" style="text-decoration: none;">
+                        <button class="btn-66">About</button>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'profile_view' %}" style="text-decoration: none;">
+                            <button class="btn-66">Profile</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}" style="text-decoration: none;">
+                            <button class="btn-66">Logout</button>
+                        </a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}" style="text-decoration: none;">
+                            <button class="btn-66">Login</button>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <!-- favorites.html -->
+     <div class="head">
+        #Add Your Favorite Music in Here
+     </div>
+    <section class="container-2">
+        <div class="music-list">
+            {% for music in favorite_music %}
+                <div class="music-card">
+                    <div class="cover-image">
+                        {% if music.cover_image %}
+                            <img src="{{ music.cover_image.url }}" alt="{{ music.title }} Cover">
+                        {% else %}
+                            <img src="{% static 'default-cover.jpg' %}" alt="Default Cover"> <!-- Fallback image -->
+                        {% endif %}
+                    </div>
+                    <div class="info">
+                        <h2 class="title">{{ music.title }}</h2>
+                        <p>Artist: {{ music.artist }}</p>
+                        <p>Category: {{ music.category }}</p> <!-- Display the category -->
+                        <div class="custom-audio-player">
+                            <audio id="audio-player-{{ music.id }}" src="{{ music.music_file.url }}"></audio>
+                            <button class="play-pause-button" data-audio-id="audio-player-{{ music.id }}">Play</button>
+                            <input type="range" id="progress-bar" min="0" max="100" value="0" step="1">
+                            <div class="time-display">
+                                <span id="current-time">0:00</span>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="{{ music.music_file.url }}" download class="btn-1">Download</a>
+                            <button class="btn-1">
+                                <a href="{% url 'remove_from_favorites' music.id %}">Remove from Favorites</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No favorite music found.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section-three">
+        {% include 'footer.html' %}
+    </section>
+
+</body>
+</html>

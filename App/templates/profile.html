@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/29a64d6504.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Profile View</title>
+</head>
+<body>
+
+    <section class="section-one">
+        <div class="navbar" id="navbar">
+            <nav>
+                <ul>
+                    <li>MELODIFY</li>
+                    <li><a href="{% url 'index' %}" style="text-decoration: none;"><button class="btn-66">Home</button></a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'generate_lyrics' %}" style="text-decoration: none;"><button class="btn-66">Generate</button></a></li>
+                    {% endif %}
+                    <li><a href="{% url 'about_view' %}" style="text-decoration: none;"><button class="btn-66">About</button></a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile_edit' %}" style="text-decoration: none;"><button class="btn-66">Edit Profile</button></a></li>
+                    <li><a href="{% url 'logout' %}" style="text-decoration: none;"><button class="btn-66">Logout</button></a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}" style="text-decoration: none;"><button class="btn-66">Login</button></a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-box">
+            <div class="content">
+                <div class="image-box">
+                    <img src="{% if user_profile.profile_photo %}{{ user_profile.profile_photo.url }}{% else %}{% static 'images/default-profile.jpg' %}{% endif %}" alt="User Profile Picture">
+                </div>
+                <div class="about">
+                    <div class="details">
+                        <div class="name">{{ user.username }}</div>
+                        <div class="job">{{ user.email }}</div>
+                        <div class="icon">
+                            <a href="{{ user_profile.facebook_url }}" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="{{ user_profile.twitter_url }}" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="{{ user_profile.instagram_url }}" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                            <!-- Add other social media links here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer">
+            <div class="row">
+                <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+            </div>
+            <div class="row ">
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+            <div class="row">
+                <p>MELODIFY Copyright © 2024 melodify - All rights reserved ||</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

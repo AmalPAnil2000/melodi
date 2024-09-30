@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/generate.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Gowun+Batang:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/29a64d6504.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="navbar" id="navbar">
+  <nav>
+      <ul>
+          <li>MELODIFY</li>
+          <li>
+              <a href="{% url 'index' %}" style="text-decoration: none;">
+                  <button class="btn-66">Home</button>
+              </a>
+          </li>
+          {% if user.is_authenticated %}
+          <li>
+              <a href="{% url 'generate_lyrics' %}" style="text-decoration: none;">
+                  <button class="btn-66">Generate</button>
+              </a>
+          </li>
+          {% endif %}
+          <li>
+              <a href="{% url 'about_view' %}" style="text-decoration: none;">
+                  <button class="btn-66">About</button>
+              </a>
+          </li>
+          {% if user.is_authenticated %}
+              <li>
+                  <a href="{% url 'profile_view' %}" style="text-decoration: none;">
+                      <button class="btn-66">Profile</button>
+                  </a>
+              </li>
+              <li>
+                  <a href="{% url 'logout' %}" style="text-decoration: none;">
+                      <button class="btn-66">Logout</button>
+                  </a>
+              </li>
+          {% else %}
+              <li>
+                  <a href="{% url 'login' %}" style="text-decoration: none;">
+                      <button class="btn-66">Login</button>
+                  </a>
+              </li>
+          {% endif %}
+      </ul>
+  </nav>
+</div>
+
+<section class="container-1">
+  <div class="head">
+    <h1>#Generate your lyrics</h1>
+    <p>Welcome to Melodify – where creativity meets technology</p>
+  </div>
+</section>
+
+<section class="container-2">
+  <div class="head-2">
+    <div class="hd-2">
+      <div class="input-section">
+        <form method="POST" onsubmit="return validateInput();">
+            {% csrf_token %}
+            <label for="keyword">Enter Keywords to Generate Lyrics:</label>
+            <input type="text" name="keyword" id="keyword" placeholder="e.g., love, ocean, dream" oninput="showSuggestions(this.value)">
+            <div class="suggestions" id="suggestions"></div>
+        
+            <label for="genre">Choose a Genre:</label>
+            <select name="genre" id="genre">
+                <option value="pop">Pop</option>
+                <option value="rap">Rap</option>
+                <option value="melody">Melody</option>
+                <option value="hip-hop">Hip Hop</option>
+            </select>
+        
+ <!-- Minimum and Maximum Length Inputs -->
+<label for="min_length" style="font-family: 'Gowun Batang', serif; font-size: 18px; color: wheat; display: block; margin-bottom: 10px;">Minimum Length (words):</label>
+<input type="number" name="min_length" id="min_length" min="50" value="50" style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 20px; font-size: 16px; border-radius: 5px; border: none; background-color: #333; color: white;">
+
+<label for="max_length" style="font-family: 'Gowun Batang', serif; font-size: 18px; color: wheat; display: block; margin-bottom: 10px;">Maximum Length (words):</label>
+<input type="number" name="max_length" id="max_length" min="100" value="200" style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 20px; font-size: 16px; border-radius: 5px; border: none; background-color: #333; color: white;">
+
+        
+            <button type="submit" id="generate-lyrics">Generate Lyrics</button>
+        </form>
+        
+      </div>
+      <div class="output-section">
+        <h3>Generated Lyrics:</h3>
+        <div id="lyrics-output">{{ lyrics|linebreaks }}</div>  <!-- Use linebreaks filter -->
+    </div>
+    
+
+      <div id="saved-lyrics">
+        {% for lyric in saved_lyrics %}
+          <div class="lyric-card">
+            <h4>Keyword: {{ lyric.keyword }} | Genre: {{ lyric.genre }}</h4>
+            <p><strong>Verse 1:</strong><br>{{ lyric.verse1 }}</p>
+            <p><strong>Chorus:</strong><br>{{ lyric.chorus }}</p>
+            <div class="more-content">
+              <p><strong>Verse 2:</strong><br>{{ lyric.verse2 }}</p>
+              <p><strong>Bridge:</strong><br>{{ lyric.bridge }}</p>
+              <p><strong>Outro:</strong><br>{{ lyric.outro }}</p>
+            </div>
+            <a href="javascript:void(0);" class="read-more">Read More</a>
+            <p>Generated on: {{ lyric.created_at }}</p>
+            <form method="POST" action="{% url 'delete_lyric' lyric.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-66">Delete</button>
+            </form>
+          </div>
+        {% empty %}
+          <p>You haven't generated any lyrics yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container-3">
+  {% include 'footer.html' %}
+</section>
+
+<!-- script -->
+<script>
+  const keywords = ["love", "ocean", "dream", "heart", "night", "sky", "freedom", "happiness"];
+
+  function showSuggestions(input) {
+      const suggestionsDiv = document.getElementById('suggestions');
+      suggestionsDiv.innerHTML = ''; // Clear previous suggestions
+
+      if (input) {
+          const filteredKeywords = keywords.filter(keyword => keyword.toLowerCase().includes(input.toLowerCase()));
+          if (filteredKeywords.length > 0) {
+              suggestionsDiv.style.display = 'block'; // Show suggestions
+              filteredKeywords.forEach(keyword => {
+                  const div = document.createElement('div');
+                  div.textContent = keyword;
+                  div.onclick = () => selectKeyword(keyword);
+                  suggestionsDiv.appendChild(div);
+              });
+          } else {
+              suggestionsDiv.style.display = 'none'; // Hide if no matches
+          }
+      } else {
+          suggestionsDiv.style.display = 'none'; // Hide if input is empty
+      }
+  }
+
+  function selectKeyword(keyword) {
+      document.getElementById('keyword').value = keyword; // Set input value to selected keyword
+      document.getElementById('suggestions').style.display = 'none'; // Hide suggestions
+  }
+
+  function validateInput() {
+      const input = document.getElementById('keyword').value;
+      if (!input) {
+          alert('Please enter a keyword.');
+          return false; // Prevent form submission if input is empty
+      }
+      return true; // Allow form submission
+  }
+
+  function copyLyrics() {
+      const lyricsOutput = document.getElementById("lyrics-output");
+      const range = document.createRange();
+      range.selectNodeContents(lyricsOutput);
+      const selection = window.getSelection();
+      selection.removeAllRanges(); // Clear existing selections
+      selection.addRange(range); // Select the text
+
+      // Copy the selected text to the clipboard
+      navigator.clipboard.writeText(selection.toString())
+          .then(() => {
+              alert("Copied the lyrics to clipboard!");
+          })
+          .catch(err => {
+              console.error('Could not copy text: ', err);
+              alert('Failed to copy lyrics. Please try again.');
+          });
+  }
+
+  document.querySelectorAll('.read-more').forEach(function(readMoreButton) {
+    readMoreButton.addEventListener('click', function() {
+        const moreContent = this.previousElementSibling;
+        if (moreContent.style.display === 'block') {
+            moreContent.style.display = 'none';
+            this.textContent = 'Read More';
+        } else {
+            moreContent.style.display = 'block';
+            this.textContent = 'Read Less';
+        }
+    });
+});
+</script>
+
+</body>
+</html>

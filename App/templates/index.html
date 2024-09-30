@@ -3,24 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/29a64d6504.js" crossorigin="anonymous"></script>
+    
+
     <title>Home</title>
 </head>
-<body>
-    <h1>Home</h1>
-    
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}!</p>
-        <p>Email: {{ user.email }}</p>
-        <p>First Name: {{ user.first_name }}</p>
-        <p>Last Name: {{ user.last_name }}</p>
 
-        <!-- Logout Form -->
-        <form action="{% url 'logout' %}" method="POST">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
-    {% else %}
-        <p>You are not logged in.</p>
-    {% endif %}
+<body>
+<!-- Navbar -->
+
+<div class="navbar" id="navbar">
+    <nav>
+        <ul>
+            <li>MELODIFY</li>
+            <li>
+                <a href="{% url 'index' %}" style="text-decoration: none;">
+                    <button class="btn-66">Home</button>
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'music_list' %}" style="text-decoration: none;">
+                    <button class="btn-66">Music</button>
+                </a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="{% url 'about_view' %}" style="text-decoration: none;">
+                    <button class="btn-66">About</button>
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'profile_view' %}" style="text-decoration: none;">
+                        <button class="btn-66">Profile</button>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}" style="text-decoration: none;">
+                        <button class="btn-66">Logout</button>
+                    </a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'login' %}" style="text-decoration: none;">
+                        <button class="btn-66">Login</button>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+
+<!-- main content -->
+
+<section class="section-one"style="background-image: url('{% static 'img/background.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh;">
+    <div class="main fade-in">
+        <h1>Lyrics<br><span>Generator</span></h1>
+        <h3>Welcome <span style="color: rgb(254, 173, 0);">{{user.username}}</span> to Our Music Platform</h3>
+        <p class=" line-1 anim-typewriter">Explore our music library, generate playlists, and enjoy your favorite tracks.</p>
+    </div>
+    <div class="icone">
+        <i class="fa-brands fa-github"></i>
+        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-solid fa-g"></i>
+    </div>  
+</section>
+
+
+<section class="section-one"style="background-image: url('{% static 'img/bg-2.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh;">
+
+    <div class="rec" id="container">
+        <h1 class="words">Beats...Melody...Harmony...Rhythm...Lyrics...Guitar...Piano...Drums...Bass...Vocals</h1> 
+        <h1 class="words">Beats...Melody...Harmony...Rhythm...Lyrics...Guitar...Piano...Drums...Bass...Vocals!</h1>       
+    </div>
+    
+
+    <div class="t-card">
+        <div class="card"style="background-image: url('{% static 'img/card-bg.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">Welcome</div>
+        <div class="card card-1"style="background-image: url('{% static 'img/card-bg.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">To</div>
+        <div class="card card-2"style="background-image: url('{% static 'img/card-bg.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">melodify</div>
+    </div>
+
+    <div class="icone-2">
+        <i class="fa-brands fa-github"></i><br>
+        <i class="fa-brands fa-x-twitter"></i><br>
+        <i class="fa-solid fa-g"></i>
+    </div> 
+
+    <div class="text-1 hidden">
+        <h1>#Generate your Own Lyrics</h1>
+        {% if user.is_authenticated %}
+        <button class="button">
+            <div class="dots_border"></div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              class="sparkle"
+            >
+              <path
+                class="path"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke="black"
+                fill="black"
+                d="M14.187 8.096L15 5.25L15.813 8.096C16.0231 8.83114 16.4171 9.50062 16.9577 10.0413C17.4984 10.5819 18.1679 10.9759 18.903 11.186L21.75 12L18.904 12.813C18.1689 13.0231 17.4994 13.4171 16.9587 13.9577C16.4181 14.4984 16.0241 15.1679 15.814 15.903L15 18.75L14.187 15.904C13.9769 15.1689 13.5829 14.4994 13.0423 13.9587C12.5016 13.4181 11.8321 13.0241 11.097 12.814L8.25 12L11.096 11.187C11.8311 10.9769 12.5006 10.5829 13.0413 10.0423C13.5819 9.50162 13.9759 8.83214 14.186 8.097L14.187 8.096Z"
+              ></path>
+              <path
+                class="path"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke="black"
+                fill="black"
+                d="M6 14.25L5.741 15.285C5.59267 15.8785 5.28579 16.4206 4.85319 16.8532C4.42059 17.2858 3.87853 17.5927 3.285 17.741L2.25 18L3.285 18.259C3.87853 18.4073 4.42059 18.7142 4.85319 19.1468C5.28579 19.5794 5.59267 20.1215 5.741 20.715L6 21.75L6.259 20.715C6.40725 20.1216 6.71398 19.5796 7.14639 19.147C7.5788 18.7144 8.12065 18.4075 8.714 18.259L9.75 18L8.714 17.741C8.12065 17.5925 7.5788 17.2856 7.14639 16.853C6.71398 16.4204 6.40725 15.8784 6.259 15.285L6 14.25Z"
+              ></path>
+              <path
+                class="path"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke="black"
+                fill="black"
+                d="M6.5 4L6.303 4.5915C6.24777 4.75718 6.15472 4.90774 6.03123 5.03123C5.90774 5.15472 5.75718 5.24777 5.5915 5.303L5 5.5L5.5915 5.697C5.75718 5.75223 5.90774 5.84528 6.03123 5.96877C6.15472 6.09226 6.24777 6.24282 6.303 6.4085L6.5 7L6.697 6.4085C6.75223 6.24282 6.84528 6.09226 6.96877 5.96877C7.09226 5.84528 7.24282 5.75223 7.4085 5.697L8 5.5L7.4085 5.303C7.24282 5.24777 7.09226 5.15472 6.96877 5.03123C6.84528 4.90774 6.75223 4.75718 6.697 4.5915L6.5 4Z"
+              ></path>
+            </svg>
+            <span class="text_button"><a href="{% url 'music_list' %}" class="text_button">Enjoy Music</a></span>
+          </button>
+          {% endif %}
+          
+    </div>
+</section>
+
+<section class="section-two"style="background-image: url('{% static 'img/bg-2.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <div class="expression">
+        <h1><span>#Create</span><span>#Sing</span><span>#Express</span></h1>
+    </div>
+    <div class="card-music">
+        <div class="card-1" style="background-color: black;">
+            <img src="{% static 'img/music.gif'%}" alt="Girl in a jacket" width="100" height="100">
+            <p>Creating lyrics is a profound form of self-expression It involves crafting words.</p>
+        </div>
+    
+        <div class="card-1"style="background-color: black;">
+            <img src="{% static 'img/headphone.gif'%}" alt="Girl in a jacket" width="100" height="100">
+            <p>Singing lyrics brings them to life, turning written words into a vocal performance.</p>
+        </div>
+    
+        <div class="card-1"style="background-color: black;">
+            <img src="{% static 'img/sound-wave.gif'%}" alt="Girl in a jacket" width="100" height="100">
+            <p>Expressing through lyrics involves communicating feelings and ideas.</p>
+        </div>
+    </div>
+    <div class="card-text">
+        <p>Creating lyrics is a powerful way to express oneself and connect with others. The process involves crafting words that convey deep emotions and stories, transforming personal experiences into art. Once the lyrics are written, they come to life when sung, allowing the artist to infuse the song with unique vocal interpretations and emotional depth. Through creating, singing, and expressing in this way, music becomes a profound medium for sharing feelings and connecting with audiences on a personal level</p>
+    </div>
+</section>
+
+<section class="section-three">
+    {% include 'footer.html' %}
+</section>
+
+
+<!-- script -->
+
+
+ <!-- text-1 scrool -->
+ <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    });
+
+    const textElement = document.querySelector('.text-1');
+    observer.observe(textElement);
+});
+
+</script>
+
+
+<!-- js-link -->
+<script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

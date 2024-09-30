@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'Melodify.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lyrics',   # The name of the database you created
+        'NAME': 'melodify',   # The name of the database you created
         'USER': 'root',           # The default MySQL user in XAMPP
         'PASSWORD': '',           # Leave blank if there's no password for 'root'
         'HOST': 'localhost',      # Usually 'localhost' for XAMPP
@@ -95,12 +95,12 @@ DATABASES = {
     }
 }
 
-DATABASES = {
-    'default' :dj_database_url.parse(
-        "postgresql://melodify_user:RGoSwpTLikKl7E6P67te7g5T1yAAotJy@dpg-crf9phjqf0us738hm2eg-a.singapore-postgres.render.com/melodify"
-    )
+# DATABASES = {
+#     'default' :dj_database_url.parse(
+#         "postgresql://melodify_user:RGoSwpTLikKl7E6P67te7g5T1yAAotJy@dpg-crf9phjqf0us738hm2eg-a.singapore-postgres.render.com/melodify"
+#     )
 
-}
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

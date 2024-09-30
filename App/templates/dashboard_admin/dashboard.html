@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="{% url 'user_management' %}" class="active">Users</a></li>
+                <li><a href="{% url 'daily_report' %}" class="active">Report</a></li>
+                <li><a href="{% url 'index' %}" class="active">Home</a></li>
+                <li><a href="{% url 'add_music' %}" style="text-decoration: none;">Upload</a></li>
+                <li><a href="{% url 'logout' %}" style="text-decoration: none;">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="main-content">
+            <div class="content">
+                <section class="container-1">
+                    <div class="head">
+                      <h1>#Melodify</h1>
+                      <p>Admin Panel</p>
+                    </div>
+                </section>
+
+                <!-- Card Section -->
+                <section class="container-2">
+                    <div class="cards">
+                        <div class="card red">
+                            <p class="tip">USER</p>
+                            <p class="second-text" id="mychart">{{ user_count }}</p>
+                        </div>
+                        <div class="card blue">
+                            <p class="tip">GENERATION</p>
+                            <p class="second-text">{{ total_generations }}</p>
+                        </div>
+                        <div class="card green">
+                            <p class="tip">Music Count</p>
+                            <p class="second-text">{{ total_music_count }}</p>
+                        </div>
+                    </div>
+                </section>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+
+                <!-- Visualization Section -->
+                <section class="container-3">
+                    <h2>Analytics Overview</h2>
+                    <canvas id="adminChart"></canvas> <!-- Chart will be drawn here -->
+                </section>
+
+                <div>
+                    <canvas id="loginChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['User Count', 'Total Generation', 'Total Music'],
+                datasets: [{
+                    label: '# Count',
+                    data: [
+                        {{ user_count|default:"0" }}, 
+                        {{ total_generations|default:"0" }}, 
+                        {{ total_music_count|default:"0" }}
+                    ],
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        // Line Chart for User Logins Over the Last 7 Days
+        const loginCtx = document.getElementById('loginChart').getContext('2d');
+        new Chart(loginCtx, {
+            type: 'line',
+            data: {
+                labels: {{ days|safe }},  // Dates for the last 7 days
+                datasets: [{
+                    label: 'User Logins per Day',
+                    data: {{ login_counts|safe }},  // Login counts for each day
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>

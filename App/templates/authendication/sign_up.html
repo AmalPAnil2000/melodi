@@ -3,15 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up page for creating an account.">
+    <meta name="keywords" content="signup, registration, login">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <script src="https://kit.fontawesome.com/29a64d6504.js" crossorigin="anonymous"></script>
     <title>Sign Up</title>
 </head>
-<body>
-    <h2>Sign Up</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+<body onload="loadfun()">
+
+    <section class="one"style="background-image: url('{% static 'img/sign-bg.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh;">
+        <div class="form-container">
+            <h2>Sign Up</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        <!-- Hide the help text if it exists -->
+                        {% if field.help_text %}
+                            <small style="display: none;">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="{% url 'login' %}" id="login-link">Login here</a></p>
+            <div class="icone">
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-solid fa-g"></i>
+            </div>
+        </div>
+        <div class="expression">
+            <h1><span>#Create#Sing#Express</span></h1>
+        </div>
+    </section>
 </body>
 </html>

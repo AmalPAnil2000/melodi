@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Report - PDF</title>
+</head>
+<body>
+    <h1>Daily Report for {{ today }}</h1>
+
+    <!-- Overview -->
+    <h2>Overview</h2>
+    <table>
+        <tr>
+            <th>Generation Count</th>
+            <td>{{ generation_count }}</td>
+        </tr>
+        <tr>
+            <th>Login Count</th>
+            <td>{{ login_count }}</td>
+        </tr>
+        <tr>
+            <th>Music Added Count</th>
+            <td>{{ total_music_count }}</td>
+        </tr>
+    </table>
+
+    <!-- User Details -->
+    <h2>User Details (Logged in Today)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Last Login</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users_logged_in_today %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.last_login }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No users logged in today.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

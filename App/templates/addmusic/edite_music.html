@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Music</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    max-width: 500px; /* Limit the width of the form */
+    margin: 20px auto; /* Center the form horizontally */
+    background: #fff; /* White background for the form */
+    padding: 20px; /* Padding inside the form */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth effect */
+}
+
+form button {
+    background: #28a745; /* Green background for button */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background 0.3s; /* Smooth transition for hover effect */
+}
+
+form button:hover {
+    background: #218838; /* Darker green on hover */
+}
+
+a {
+    text-align: center;
+    display: inline-block; /* Display as inline-block */
+    margin-top: 20px; /* Space above the link */
+    text-align: center; /* Center the text */
+    color: #007bff; /* Bootstrap primary color for link */
+    text-decoration: none; /* Remove underline from link */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+a:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    form {
+        width: 90%; /* Make form responsive on smaller screens */
+    }
+}
+
+</style>
+<body>
+    <h1>Edit Music</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+        <a style=" padding:20px;background-color: red; text-decoration: none; color: white; border-radius: 20px; width: 50%; height: 10px; " href="{% url 'add_music' %}">Cancel</a>
+    </form>
+</body>
+</html>

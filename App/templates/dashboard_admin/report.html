@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Report</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/report.css' %}">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+                <li><a href="{% url 'user_management' %}">Users</a></li>
+                <li><a href="{% url 'daily_report' %}" class="active">Reports</a></li>
+                <li><a href="{% url 'index' %}" class="active">Home</a></li>
+                <li><a href="{% url 'add_music' %}" style="text-decoration: none;">Upload</a></li>
+                <!-- <li><a href="#">Settings</a></li> -->
+                <li><a href="{% url 'logout' %}" style="text-decoration: none;">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <h1>Daily Report for {{ today }}</h1>
+
+            <!-- PDF Download Button -->
+            <a href="?download=pdf" class="btn btn-primary">Download Report as PDF</a>
+
+            <!-- Report Section -->
+            <section class="report-section">
+                <h2>Overview</h2>
+                <div class="report-cards">
+                    <div class="report-card">
+                        <h3>Generation Count</h3>
+                        <p>{{ generation_count }}</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>Login Count</h3>
+                        <p>{{ login_count }}</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>Music Added Count</h3>
+                        <p>{{ total_music_count  }}</p>
+                    </div>
+                </div>
+
+                <h2>User Details (Logged in Today)</h2>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Last Login</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users_logged_in_today %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.last_login }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4">No users logged in today.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
