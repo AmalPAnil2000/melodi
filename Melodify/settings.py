@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import dj_database_url
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,14 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = 'django-insecure-=0my&j%o$0=u2!6t=mq#*z+r+k^7jj$pn%4*8hcjf^x61792^d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = True
 
-# 
 ALLOWED_HOSTS = ['*']
-
 
 
 # Application definition
@@ -97,13 +94,24 @@ WSGI_APPLICATION = 'Melodify.wsgi.application'
 #         'PORT': '3306',           # Default MySQL port in XAMPP
 #     }
 # }
-database_url = os.environ.get("DATABASE_URL")
-DATABASES = {
-    'default' :dj_database_url.parse(
-        database_url
-    )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'melodify_data_dl5i',  # Database name from the URL
+        'USER': 'melodify_data_dl5i_user',  # Username from the URL
+        'PASSWORD': 'OPkawmrlOWEujjuUeA83T3Q7PJZaEb3d',  # Password from the URL
+        'HOST': 'dpg-crtfgb3v2p9s73ct6rpg-a.singapore-postgres.render.com',  # Host from the URL
+        'PORT': '5432',  # PostgreSQL default port
+    }
 }
+
+# DATABASES = {
+#     'default' :dj_database_url.parse(
+#         "postgresql://melodify_user:RGoSwpTLikKl7E6P67te7g5T1yAAotJy@dpg-crf9phjqf0us738hm2eg-a.singapore-postgres.render.com/melodify"
+#     )
+
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
