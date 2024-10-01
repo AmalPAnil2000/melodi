@@ -1,0 +1,51 @@
+ /* Custom Styling for the form */
+ .container {
+    max-width: 700px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2, h4 {
+    text-align: center;
+    color: #007bff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Social media links specific section */
+.social-links-header {
+    margin-top: 20px;
+    color: #495057;
+}
+
+/* Custom file input styling */
+.form-control-file {
+    border: none;
+    background-color: #f8f9fa;
+}

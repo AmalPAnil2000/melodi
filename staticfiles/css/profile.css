@@ -1,0 +1,322 @@
+
+
+
+/* navbar */
+
+.navbar{
+    background-color: black;
+    width: 100%;
+    height: auto;
+    position: sticky;
+    justify-content: center;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar.white {
+    background-color: white;
+}
+
+.navbar.white nav ul li {
+    color: black; 
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+
+nav ul li{
+    color: white;
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    margin-left: 25px;
+    padding: 15px;
+    text-decoration: none;
+}
+
+nav ul li img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+nav ul{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-66,
+.btn-66 *,
+.btn-66 :after,
+.btn-66 :before,
+.btn-66:after,
+.btn-66:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-66 a{
+    text-decoration: none;
+}
+.btn-66 {
+  -webkit-tap-highlight-color: transparent;
+  /* -webkit-appearance: button; */
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  /* -webkit-mask-image: -webkit-radial-gradient(#000, #fff); */
+  padding: 0;
+}
+.btn-66:disabled {
+  cursor: default;
+}
+.btn-66:-moz-focusring {
+  outline: auto;
+}
+.btn-66 svg {
+  display: block;
+  /* vertical-align: middle; */
+}
+.btn-66 [hidden] {
+  display: none;
+}
+.btn-66 {
+text-decoration: none;
+  --height: 30px;
+  --progress: 0px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: transparent;
+  display: block;
+  font-weight: 900;
+  line-height: var(--height);
+  overflow: hidden;
+  padding: 0 60px;
+  position: relative;
+  text-shadow: 0 calc(var(--progress) * -1)#fff,0 calc(var(--height) - var(--progress))wheat;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+.btn-66:hover {
+  --progress: var(--height);
+  border-color:wheat;
+}
+
+
+/* footer */
+.footer{
+    background:#000;
+    padding:30px 0px;
+    font-family: 'Play', sans-serif;
+    text-align:center;
+    }
+    
+    .footer .row{
+    width:100%;
+    margin:1% 0%;
+    padding:0.6% 0%;
+    color:gray;
+    font-size:0.8em;
+    }
+    
+    .footer .row a{
+    text-decoration:none;
+    color:gray;
+    transition:0.5s;
+    }
+    
+    .footer .row a:hover{
+    color:#fff;
+    }
+    
+    
+    .footer .row ul li{
+    display:inline-block;
+    margin:0px 30px;
+    }
+    
+    .footer .row a i{
+    font-size:2em;
+    margin:0% 1%;
+    }
+    
+    @media (max-width:720px){
+    .footer{
+    text-align:left;
+    padding:5%;
+    }
+    .footer .row ul li{
+    display:block;
+    margin:10px 0px;
+    text-align:left;
+    }
+    .footer .row a i{
+    margin:0% 3%;
+    }
+    }
+
+
+/* section */
+.section-one{
+    width: auto;
+    height: 100vh;
+    background-color: black;
+}
+
+
+/* card */
+.main-box{
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 550px;
+    text-align: center;
+  }
+  .main-box .content{
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  .content .box{
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+  .share, .cancel{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2980b9;
+    line-height: 50px;
+    background: #fff;
+    letter-spacing: 1px;
+    border-radius: 25px;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .content .box .share{
+    opacity: 1;
+  }
+  #check:checked ~ .box .share{
+    opacity: 0;
+  }
+  #check:checked ~ .box .cancel{
+    opacity: 1;
+  }
+  .content .image-box{
+    position: absolute;
+    height: 450px;
+    width: 100%;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 10px;
+    border-radius: 25px;
+    transition: all 0.4s ease;
+  }
+  #check:checked ~ .image-box{
+    bottom: 70px;
+  }
+  #check{
+    display: none;
+  }
+  .image-box::before{
+    position: absolute;
+    content: '';
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    height: 30px;
+    width: 30px;
+    background: #fff;
+    z-index: -1;
+  }
+  .image-box img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 26px;
+  }
+  .image-box .about{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 25px;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  #check:checked ~ .image-box .about{
+    opacity: 1;
+  }
+  .about .details{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 450px;
+  }
+  .details .name, .job{
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 10px;
+    color: #fff;
+  }
+   .details .icon i{
+     font-size: 20px;
+     color: #fff;
+     height: 45px;
+     width: 45px;
+     line-height: 43px;
+     border-radius: 50%;
+     border: 2px solid #fff;
+     margin: 14px 5px;
+     transition: all 0.3s ease;
+   }
+  .details .icon i.fa-facebook-f:hover{
+    transform: scale(0.95);
+    color: #0f53e6;
+  }
+
+  .details .icon i.fa-twitter:hover{
+    transform: scale(0.95);
+    color: #1da1f2;
+  }
+
+  .details .icon i.fa-instagram:hover{
+    transform: scale(0.95);
+    color: #e4405f;
+  }

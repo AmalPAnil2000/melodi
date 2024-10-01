@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.sidebar {
+    background: linear-gradient(135deg, #48024d, #9b0056);
+    color: #fff;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #48024d, #9b0056);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+}
+
+.sidebar-menu li {
+    padding: 15px;
+}
+
+.sidebar-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar-menu li a:hover {
+    background: #555;
+}
+
+h1 {
+    text-align: center; /* Centering title */
+    font-size: 24px;
+    color: #333;
+    margin-top: 20px; /* Adding margin for spacing */
+}
+
+form {
+    margin-left: 320px; /* Leave space for the sidebar */
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form button {
+    background: #28a745; /* Green background */
+    color: white;
+    border: none;
+    width: 30%;
+    padding: 15px; /* Reduced padding for a better button size */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 20px; /* Space above the button */
+}
+
+/* General Table Styles */
+table {
+    width: 70%;
+    border-collapse: collapse; /* Remove space between borders */
+    margin-left: 350px; /* Add margin for spacing */
+    font-size: 1em; /* Font size */
+    font-family: Arial, sans-serif; /* Font family */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle depth effect */
+}
+
+/* Table Header Styles */
+thead {
+    background-color: #f2f2f2; /* Light gray background for header */
+    color: #333; /* Dark text color */
+}
+
+th, td {
+    padding: 12px 15px; /* Padding for cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Border at the bottom of cells */
+}
+
+/* Row Hover Effect */
+tbody tr:hover {
+    background-color: #f9f9f9; /* Light gray background on hover */
+}
+
+/* Actions Column Styles */
+td a {
+    color: #007bff; /* Bootstrap primary color for links */
+    text-decoration: none; /* Remove underline from links */
+    margin-right: 10px; /* Space between links */
+}
+
+td form {
+    display: inline; /* Keep form inline with text */
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100%; /* Make sidebar full-width on mobile */
+        position: relative; /* Position relative for stacking */
+        height: auto; /* Height auto for mobile */
+    }
+
+    form {
+        margin-left: 0; /* No margin for mobile */
+        margin-top: 20px; /* Add margin top for spacing */
+    }
+
+    table {
+        display: block; /* Make table scrollable */
+        overflow-x: auto; /* Enable horizontal scrolling */
+    }
+
+    th, td {
+        display: block; /* Stack cells vertically */
+        text-align: right; /* Align text to the right for readability */
+    }
+
+    th {
+        text-align: left; /* Align header text to the left */
+    }
+
+    tr {
+        margin-bottom: 15px; /* Space between rows */
+    }
+}

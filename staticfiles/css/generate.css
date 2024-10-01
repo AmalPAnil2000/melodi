@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Gowun+Batang:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body{
+    background-color: #000;
+}
+/* navbar */
+
+.navbar{
+    margin: 0px;
+    background-color: black;
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar.white {
+    background-color: white;
+}
+
+.navbar.white nav ul li {
+    color: black; 
+}
+
+nav ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+
+nav ul li{
+    color: white;
+    list-style: none;
+    text-align: center;
+    align-items: center;
+    margin-left: 25px;
+    padding: 15px;
+    text-decoration: none;
+}
+
+nav ul li img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+nav ul{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* text */
+.container-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 50vh;
+    background-color: #000;
+    margin: 0px;
+}
+
+.head {
+    position: relative;
+    bottom: 40px;
+    width: 100%;
+    height: auto;
+    animation: slideUp 1s ease-in-out both;
+}
+.head h1{
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 50px;
+    font-family: "Gowun Batang", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    text-align: center;
+    transition: color 0.2s ease-in-out;
+    opacity: 0; /* Initially hidden */
+    animation: slideUp 1s ease-in-out both;
+    background: linear-gradient(90deg, #ff8a00, #e52e71, #9d50bb);
+    -webkit-background-clip: text;  
+    background-clip: text;     
+    -webkit-text-fill-color: transparent;
+    -webkit-box-reflect: below 40px linear-gradient(transparent, rgba(255, 255, 255, 0.2)); 
+}
+
+.head p{
+    margin-top: 0px;
+    font-size: 25px;
+    font-family: "Gowun Batang", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    text-align: center;
+    animation-delay: 0.5s;
+    background: linear-gradient(90deg, #ffffff, rgb(231, 168, 116));
+    -webkit-background-clip: text;  
+    background-clip: text;     
+    -webkit-text-fill-color: transparent;  
+}
+
+@keyframes slideUp {
+    0% {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+
+
+.btn-66,
+.btn-66 *,
+.btn-66 :after,
+.btn-66 :before,
+.btn-66:after,
+.btn-66:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-66 a{
+    text-decoration: none;
+}
+.btn-66 {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+.btn-66:disabled {
+  cursor: default;
+}
+.btn-66:-moz-focusring {
+  outline: auto;
+}
+.btn-66 svg {
+  display: block;
+  /* vertical-align: middle; */
+}
+.btn-66 [hidden] {
+  display: none;
+}
+.btn-66 {
+text-decoration: none;
+  --height: 30px;
+  --progress: 0px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: transparent;
+  display: block;
+  font-weight: 900;
+  line-height: var(--height);
+  overflow: hidden;
+  padding: 0 60px;
+  position: relative;
+  text-shadow: 0 calc(var(--progress) * -1)#fff,0 calc(var(--height) - var(--progress))wheat;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+.btn-66:hover {
+  --progress: var(--height);
+  border-color:wheat;
+}
+
+/* section-2 */
+
+.container-2 {
+    width: auto;
+    height: auto;
+    background-color: #000000;
+    margin: 0px;
+}
+
+.hd-2{
+    width: 100%;
+}
+
+.head-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Input section style */
+.input-section {
+    position: relative;
+    left: 430px;
+    background-color: #222;  /* Slightly lighter background */
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.input-section label {
+    font-family: 'Gowun Batang', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+    color: wheat;
+}
+
+.input-section input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+}
+
+.input-section select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+}
+
+.input-section button[type="submit"] {
+    background-color: #ff8a00;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.input-section button[type="submit"]:hover {
+    background-color: #e52e71;
+}
+
+/* Suggestions box */
+.suggestions {
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: -10px;
+    display: none; /* Hidden until suggestions are available */
+}
+
+.input-section input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: white;
+}
+
+/* Styling for the labels to make them consistent */
+.input-section label {
+    font-family: 'Gowun Batang', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+    color: wheat;
+}
+
+/* Output section style */
+.output-section {
+    position: relative;
+    left: 430px;
+    background-color: #222;
+    border-radius: 15px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    color: wheat;
+}
+
+.output-section h3 {
+    font-family: 'Gowun Batang', serif;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 22px;
+    font-family: "Roboto", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#lyrics-output {
+    font-family: 'Gowun Batang', serif;
+    font-size: 16px;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    color: #fff;
+}
+
+
+
+#saved-lyrics {
+    display: flex;
+    flex-direction:column; /* Align items in a column to display row-by-row */
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 14px;
+    width: 100%; /* Full width of the container */
+    padding: 0 10px; /* Add some padding */
+}
+
+#saved-lyrics h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.lyric-card {
+    margin-bottom: 20px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    color: wheat;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    width: 100%; /* Full width for card */
+    max-width: 600px; /* Optional max width for better control */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Ensure content inside aligns vertically */
+}
+
+.more-content {
+    display: none; /* Initially hidden */
+    margin-top: 10px;
+}
+
+.read-more {
+    color: #00b4d8;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.read-more:hover {
+    color: #0077b6;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    #saved-lyrics {
+        width: 100%; /* Ensure full width on smaller screens */
+    }
+
+    .lyric-card {
+        width: 100%; /* Adjust cards to fit smaller screens */
+        max-width: 100%;
+    }
+}
+
+/* section-4 */
+
+.container-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 100%;
+}
